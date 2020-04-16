@@ -936,6 +936,7 @@ extension Connection {
     }
 
     private func columnNamesForQuery(_ query: QueryType) throws -> [String: Int] {
+        print("columnNamesForQuery")
         var (columnNames, idx) = ([String: Int](), 0)
         column: for each in query.clauses.select.columns {
             var names = each.expression.template.split { $0 == "." }.map(String.init)
@@ -959,6 +960,7 @@ extension Connection {
                 let queries = [select] + query.clauses.join.map { $0.query }
                 if !namespace.isEmpty {
                     let tableNames = queries.map({ $0.tableName().expression.template })
+                    print(tableNames)
                     if !tableNames.contains(namespace) {
                         throw QueryError.noSuchTable(name: namespace)
                     }
