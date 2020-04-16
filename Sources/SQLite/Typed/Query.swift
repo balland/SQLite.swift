@@ -960,10 +960,9 @@ extension Connection {
                 let queries = [select] + query.clauses.join.map { $0.query }
                 if !namespace.isEmpty {
                     let tableNames = queries.map({ $0.tableName().expression.template })
-                    print(tableNames)
-                    if !tableNames.contains(namespace) {
-                        throw QueryError.noSuchTable(name: namespace)
-                    }
+//                    if !tableNames.contains(namespace) {
+//                        throw QueryError.noSuchTable(name: namespace)
+//                    }
                     for q in queries {
                         if q.tableName().expression.template == namespace {
                             try expandGlob(true)(q)
